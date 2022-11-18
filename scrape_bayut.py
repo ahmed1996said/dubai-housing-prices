@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 from tqdm import tqdm
 import sys
+from datetime import datetime
 
 EMIRATES_VALUES = ['abu-dhabi','dubai','sharjah','ajman','umm-al-quwain','ras-al-khaimah','fujairah']
 NUM_PROPERTIES_PER_PAGE = 24
@@ -28,7 +29,7 @@ def scrape_bayut(emirate='dubai',furnished='all'):
     assert emirate in EMIRATES_VALUES, f'emirate attr must be one of {EMIRATES_VALUES}'
     assert furnished in ['all','furnished','unfurnished'], f"furnished attr must be one of {['all','furnished','unfurnished']}"
     
-    bedrooms,bathrooms,area,prices,locations,property_types,property_keywords,furnished_bool = [],[],[],[],[],[],[],[]
+    bedrooms,bathrooms,area,prices,locations,property_types,property_keywords,furnished_bool, descriptions, amenities = [],[],[],[],[],[],[],[],[],[]
 
     url = get_url(furnished=furnished,emirate=emirate,page=1)
     
@@ -68,6 +69,18 @@ def scrape_bayut(emirate='dubai',furnished='all'):
                     area.append(-1)
                 if furnished != 'all':
                     furnished_bool.append(1 if furnished else 0)
+                card = soup.find('div',class_='_4041eb80')
+                ppty_url = 'https://bayut.com'+card.find('a')['href']
+                ppty_html = requests.get(ppty_url).content
+                soup_ppty = BeautifulSoup(ppty_html,'lxml')
+                try:
+                    descriptions.append(soup_ppty.find('span',class_='_2a806e1e').text)
+                except:
+                    descriptions.append(-1)
+                try:
+                    amenities.append(soup_ppty.find('div',class_='e475b606').text)
+                except:
+                    amenities.append(-1)
         except:
             print(f"Exiting early.. scraped {page-1}/{pages}")
             break
@@ -80,13 +93,15 @@ def scrape_bayut(emirate='dubai',furnished='all'):
     "locations" : locations,
     "property_types" : property_types,
     "property_keywords" : property_keywords,
-    "furnished": furnished_bool
+    "furnished": furnished_bool,
+    "description": descriptions,
+    "amenities": amenities
     }
     if furnished == 'all':
         del col_dict['furnished']
     df = pd.DataFrame(col_dict)
 
-    df.to_csv(f'properties_{emirate}_furnished={furnished}2.csv',index=False)
+    df.to_csv(f'properties_{emirate}_furnished={furnished}_{str(datetime.now()).split(".")[0]}.csv',index=False)
 
 if __name__ == '__main__':
     scrape_bayut(emirate='dubai',furnished='all')
