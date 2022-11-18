@@ -5,6 +5,7 @@ from tqdm import tqdm
 import sys
 from datetime import datetime
 
+
 EMIRATES_VALUES = ['abu-dhabi','dubai','sharjah','ajman','umm-al-quwain','ras-al-khaimah','fujairah']
 NUM_PROPERTIES_PER_PAGE = 24
 
@@ -21,7 +22,7 @@ def get_url(furnished='all',emirate='dubai',page=1):
     return url
 
 
-def scrape_bayut(emirate='dubai',furnished='all'): 
+def scrape_bayut(emirate='dubai',furnished='all',fast_scrape=False): 
 
     print(f"Starting scrape for {emirate.capitalize()}..")
     emirate = emirate.lower().replace(' ','-')
@@ -70,6 +71,8 @@ def scrape_bayut(emirate='dubai',furnished='all'):
                 if furnished != 'all':
                     furnished_bool.append(1 if furnished else 0)
                 card = soup.find('div',class_='_4041eb80')
+                if  fast_scrape: 
+                    continue
                 ppty_url = 'https://bayut.com'+card.find('a')['href']
                 ppty_html = requests.get(ppty_url).content
                 soup_ppty = BeautifulSoup(ppty_html,'lxml')
@@ -81,7 +84,8 @@ def scrape_bayut(emirate='dubai',furnished='all'):
                     amenities.append(soup_ppty.find('div',class_='e475b606').text)
                 except:
                     amenities.append(-1)
-        except:
+        except Exception as e:
+            print(e)
             print(f"Exiting early.. scraped {page-1}/{pages}")
             break
 
@@ -100,9 +104,12 @@ def scrape_bayut(emirate='dubai',furnished='all'):
     if furnished == 'all':
         del col_dict['furnished']
     df = pd.DataFrame(col_dict)
+    if fast_scrape:
+        del descriptions
+        del amenities
 
     df.to_csv(f'properties_{emirate}_furnished={furnished}_{str(datetime.now()).split(".")[0]}.csv',index=False)
 
 if __name__ == '__main__':
-    scrape_bayut(emirate='dubai',furnished='all')
+    scrape_bayut(emirate='dubai',furnished='all',fast_scrape=False)
 
