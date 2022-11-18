@@ -49,13 +49,28 @@ def scrape_bayut(emirate='dubai',furnished='all',fast_scrape=False):
             properties = soup.find_all('div',class_='d6e81fd0')        
             
             for property in properties:
-                prices.append(property.find('span',class_='f343d9ce').text)
-                locations.append(property.find('div',class_='_7afabd84').text)
-                property_types.append(property.find('div',class_='_9a4e3964').text)
-                property_keywords.append(property.find('h2',class_='_7f17f34f').text)
+                try:
+                    prices.append(property.find('span',class_='f343d9ce').text)
+                except:
+                    prices.append(-1)
+                try:
+                    locations.append(property.find('div',class_='_7afabd84').text)
+                except:
+                    prices.append(-1)
+                try:
+                    property_types.append(property.find('div',class_='_9a4e3964').text)
+                except:
+                    property_types.append(-1)
+                try:
+                    property_keywords.append(property.find('h2',class_='_7f17f34f').text)
+                except:
+                    property_keywords.append(-1)
                 temp = []
                 for i in property.find('div',class_='_22b2f6ed').children:
-                    temp.append(i.text)
+                    try:
+                        temp.append(i.text)
+                    except:
+                        temp.append(-1)
                 try:
                     bedrooms.append(temp[0])
                 except:
