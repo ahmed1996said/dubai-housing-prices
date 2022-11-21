@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ERROR!
+{% endblock %}
+
+{% block main %}
+<div class="text-center error-div">
+    <h1 class="display-3">{{error_code}} ERROR:</h1>
+    <h1 class="display-4"> {{ message }}</h1>
+    <div>
+        <img src="https://media1.tenor.com/images/ff7156df530dc50f32c5b9870e42f40b/tenor.gif?itemid=12450274" class="rounded">
+    </div>
+    Let's get you back <a href="/">home.</a>
+</div>
+
+
+{% endblock %}

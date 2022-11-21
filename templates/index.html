@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block main %}
+          <div class="header-main">
+          <h1 class="display-3"> 🇦🇪 Predict Housing Rental Prices in Dubai </h1>
+        </div>
+        <div>
+          <form action="/predict" method="post">            
+              <div class="form-group">
+                <label  class="form-label"># Bedrooms</label>
+                  <input autocomplete="off" autofocus class="form-control w-50" name="bedrooms" placeholder="0 for Studio" type="number" max="21" min="0">
+              </div>
+              <div class="form-group">
+                <label  class="form-label"># Bathrooms</label>
+                <input autocomplete="off" class="form-control w-25" name="bathrooms" placeholder="Number of Bathrooms" type="number" max="21" min="0">
+            </div>
+            <div class="form-group">
+              <label  class="form-label">Area</label>
+              <input autocomplete="off" class="form-control w-25" name="area" placeholder="In sqft" type="number" max="40000" min="30">
+          </div>
+          <div class="form-group">
+            <select class="form-select" style="width:auto;margin : 0 auto;" aria-label="Property" name="location" id="location">
+              <option selected disabled value="">Location</option>
+              {% for item in locations %}
+                <option value="{{item}}">{{item}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-select" style="width:auto;margin : 0 auto;" aria-label="Property" name="property_type" id="property_type">
+              <option selected disabled value="">Property Type</option>
+              {% for item in property_types %}
+                <option value="{{item}}">{{item}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group checks">
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="maid" name="maid">
+              <input  type="hidden" value="0" name="maid">
+              <label class="form-check-label" for="maid">
+                Maid's Room
+              </label>
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="balcony" name="balcony">
+              <input  type="hidden" value="0" name="balcony">
+              <label class="form-check-label" for="balcony">
+                Balcony
+              </label>
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="pool" name="pool">
+              <input  type="hidden" value="0" name="pool">
+              <label class="form-check-label" for="pool">
+                Pool
+              </label>
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="gym" name="gym">
+              <input  type="hidden" value="0" name="gym">
+              <label class="form-check-label" for="gym">
+                Gym
+              </label>
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="beach" name="beach">
+              <input  type="hidden" value="0" name="beach">
+              <label class="form-check-label" for="beach">
+                Beach Proximity (~15 min walk)
+              </label>
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="sea" name="sea">
+              <input  type="hidden" value="0" name="sea">
+              <label class="form-check-label" for="sea">
+                Sea View
+              </label>
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="burj" name="burj">
+              <input  type="hidden" value="0" name="burj">
+              <label class="form-check-label" for="burj">
+                Burj Khalifa View
+              </label>
+            </div>
+            <div class="d-grid gap-2 w-25" style="width:auto;margin : 0 auto;">
+              <button class="btn btn-outline-primary" type="submit">Predict!</button>
+              </div>
+          </form>
+          </div>
+          <div class="disclaimer">
+          <p><small><b>Disclaimer:</b> This tool is developed solely for educational 
+            purposes and should not be taken as professional advice for property pricing purposes. 
+            I strongly discourage you  to make any purchase or price-setting decisions based on this tool. </small></p>
+          </div>
+          <div class="prediction-result">
+            <h5 class="display-5"> {{ message }}</h5>
+            {% if message %}
+            <p>Woah! 🤩 How did you do this? 🤔 Glad you asked! Checkout the <a href="https://github.com/ahmed1996said/dubai-housing-prices" target="_blank">GitHub repo</a> for more information (TL;DR: Machine Learning 😎)</p>
+            {% endif %}
+          </div>
+       </main>
+    </body>
+    <script>
+        document.querySelector('form').onsubmit = function() {    
+        if (!document.querySelector('input[name="bedrooms"]').value) {
+            alert('You must enter the number of bedrooms!');
+            return false;
+        }
+        if (!document.querySelector('input[name="bathrooms"]').value) {
+          alert('You must enter the number of bathrooms!');
+            return false;      
+        }
+        if (!document.querySelector('input[name="area"]').value) {
+          alert('You must enter the area!');
+            return false;      
+        }
+        if (!document.getElementById('location').value) {
+          alert('You must enter the location!');
+            return false;      
+        }
+        if (!document.getElementById('property_type').value) {
+          alert('You must enter the property type!');
+            return false;      
+        }
+        };
+    </script>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+
+
+/* colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+body{
+    /* background-color: #eeeeee24; */
+}
+
+
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+
+main .header-main{
+    color:rgb(83, 83, 83);
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.navbar{
+    background-color: hsl(238, 100%, 24%);
+}
+
+.prediction-result h5{
+    color:green;
+}
+
+.prediction-result{
+    margin-top:2rem;
+    margin-bottom:15rem%;
+}
+
+.error-div{
+    margin-top: 10%;
+}
+
+.navbar-brand, .navbar-brand:hover{
+    color:rgb(255, 255, 255);
+}
+
+div .checks{
+    margin-top: 3%;
+    margin-bottom: 3%;
+
+}
+#id{
+    background-color: #000000;
+}
+
+.disclaimer{
+    margin-top:1rem;
+}
+
+.container{
+    text-align: center;
+}
