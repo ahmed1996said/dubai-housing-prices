@@ -56,7 +56,7 @@ def scrape_bayut(emirate='dubai',furnished='all',fast_scrape=False):
                 try:
                     locations.append(property.find('div',class_='_7afabd84').text)
                 except:
-                    prices.append(-1)
+                    locations.append(-1)
                 try:
                     property_types.append(property.find('div',class_='_9a4e3964').text)
                 except:
