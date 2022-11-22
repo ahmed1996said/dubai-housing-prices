@@ -69,9 +69,13 @@ main .header-main{
     color:green;
 }
 
-.prediction-result{
+/* .prediction-result{
     margin-top:2rem;
-    margin-bottom:15rem%;
+    margin-bottom:15rem;
+} */
+
+.main-body{
+    margin-bottom:20rem;
 }
 
 .error-div{

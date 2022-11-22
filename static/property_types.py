@@ -1,4 +1,2 @@
 
-PROPERTY_TYPES = ['Apartment', 'Villa', 'Townhouse', 'Penthouse',
-       'Residential Floor', 'Villa Compound', 'Hotel Apartment',
-       'Residential Building']
+PROPERTY_TYPES = ['Apartment', 'Hotel Apartment', 'Penthouse', 'Townhouse', 'Villa']

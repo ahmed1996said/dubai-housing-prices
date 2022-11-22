@@ -1,25 +1,31 @@
 {% extends "layout.html" %}
 
 {% block main %}
+      <div class="main-body">
           <div class="header-main">
           <h1 class="display-3"> 🇦🇪 Predict Housing Rental Prices in Dubai </h1>
         </div>
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+          Scroll down to see your prediction result!
+        </div>
+        {% endif %}
         <div>
           <form action="/predict" method="post">            
               <div class="form-group">
                 <label  class="form-label"># Bedrooms</label>
-                  <input autocomplete="off" autofocus class="form-control w-50" name="bedrooms" placeholder="0 for Studio" type="number" max="21" min="0">
+                  <input autocomplete="off" autofocus class="form-control w-50" name="bedrooms" placeholder="0 for Studio" type="number" max="7" min="0">
               </div>
               <div class="form-group">
                 <label  class="form-label"># Bathrooms</label>
-                <input autocomplete="off" class="form-control w-25" name="bathrooms" placeholder="Number of Bathrooms" type="number" max="21" min="0">
+                <input autocomplete="off" class="form-control w-25" name="bathrooms" placeholder="Number of Bathrooms" type="number" max="11" min="1">
             </div>
             <div class="form-group">
               <label  class="form-label">Area</label>
-              <input autocomplete="off" class="form-control w-25" name="area" placeholder="In sqft" type="number" max="40000" min="30">
+              <input autocomplete="off" class="form-control w-25" name="area" placeholder="In sqft" type="number" max="110000" min="30">
           </div>
           <div class="form-group">
-            <select class="form-select" style="width:auto;margin : 0 auto;" aria-label="Property" name="location" id="location">
+            <select class="form-select" style="width:auto;margin : 0 auto;" aria-label="Property" name="locations" id="locations">
               <option selected disabled value="">Location</option>
               {% for item in locations %}
                 <option value="{{item}}">{{item}}</option>
@@ -27,7 +33,7 @@
             </select>
           </div>
           <div class="form-group">
-            <select class="form-select" style="width:auto;margin : 0 auto;" aria-label="Property" name="property_type" id="property_type">
+            <select class="form-select" style="width:auto;margin : 0 auto;" aria-label="Property" name="property_types" id="property_type">
               <option selected disabled value="">Property Type</option>
               {% for item in property_types %}
                 <option value="{{item}}">{{item}}</option>
@@ -35,6 +41,16 @@
             </select>
           </div>
           <div class="form-group checks">
+            <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="furnished" name="furnished">
+            <input  type="hidden" value="0" name="furnished">
+            <label class="form-check-label" for="furnished">
+              Furnished
+            </label>
+            <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="brand_new" name="brand_new">
+            <input  type="hidden" value="0" name="brand_new">
+            <label class="form-check-label" for="brand_new">
+              Brand New
+            </label>
               <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="maid" name="maid">
               <input  type="hidden" value="0" name="maid">
               <label class="form-check-label" for="maid">
@@ -60,14 +76,14 @@
               <label class="form-check-label" for="beach">
                 Beach Proximity (~15 min walk)
               </label>
-              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="sea" name="sea">
-              <input  type="hidden" value="0" name="sea">
-              <label class="form-check-label" for="sea">
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="sea_view" name="sea_view">
+              <input  type="hidden" value="0" name="sea_view">
+              <label class="form-check-label" for="sea_view">
                 Sea View
               </label>
-              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="burj" name="burj">
-              <input  type="hidden" value="0" name="burj">
-              <label class="form-check-label" for="burj">
+              <input class="col-sm-1 checkbox-inline" type="checkbox" value="1" id="burj_view" name="burj_view">
+              <input  type="hidden" value="0" name="burj_view">
+              <label class="form-check-label" for="burj_view">
                 Burj Khalifa View
               </label>
             </div>
@@ -87,6 +103,7 @@
             <p>Woah! 🤩 How did you do this? 🤔 Glad you asked! Checkout the <a href="https://github.com/ahmed1996said/dubai-housing-prices" target="_blank">GitHub repo</a> for more information (TL;DR: Machine Learning 😎)</p>
             {% endif %}
           </div>
+        </div>
        </main>
     </body>
     <script>
@@ -103,7 +120,7 @@
           alert('You must enter the area!');
             return false;      
         }
-        if (!document.getElementById('location').value) {
+        if (!document.getElementById('locations').value) {
           alert('You must enter the location!');
             return false;      
         }
