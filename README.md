@@ -2,7 +2,7 @@
 # Dubai housing rental price prediction tool using 150k+ properties from Bayut.com
 
 ## 🧑🏽‍💻 Checkout the app!
-You can run the app by going to this link: [http://property.ahmedmahrooqi.com/](http://property.ahmedmahrooqi.com/)
+You can run the app by going to this link: [http://property.ahmedmahrooqi.com/](https://dubai-housing.azurewebsites.net/)
 
 BTW, as the famous saying goes: garbage-in garbage-out. I assume that the user has a common sense (for e.g. not selecting a studio apartment with 10 bathrooms!) If you input non-sensible data, you'll get non-sensible predictions. Currently the app doesn't protect from such inputs, but I'm aiming to think about how I can do this in future versions.
 
@@ -26,7 +26,7 @@ Data cleaning, EDA and Feature Engineering is done in ```Cleaning, EDA and Featu
 Model training was performed using ```sklearn``` library. The notebook ```Model.ipynb``` contains all the relevant code for Linear Regression, Lasso Regression, Random Forest and Neural Network models. Just like before, you should be able to follow my thought process by going through the notebook.
 
 ## ▶️ Web App
-I used  [Flask](https://flask.palletsprojects.com/) to develop the App, and [Bootstrap](https://getbootstrap.com/) for HTML elements and styling. The app is hosted on [Heroku](https://www.heroku.com/).
+I used  [Flask](https://flask.palletsprojects.com/) to develop the App, and [Bootstrap](https://getbootstrap.com/) for HTML elements and styling. The app is hosted on Azure.
 
 ## ⚠️ Disclaimer
 This tool is developed solely for educational purposes and should not be taken as professional advice for property pricing purposes. I strongly discourage you to make any purchase or price-setting decisions based on this tool.
