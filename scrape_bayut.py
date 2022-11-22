@@ -10,6 +10,14 @@ EMIRATES_VALUES = ['abu-dhabi','dubai','sharjah','ajman','umm-al-quwain','ras-al
 NUM_PROPERTIES_PER_PAGE = 24
 
 def get_url(furnished='all',emirate='dubai',page=1):
+    '''
+    args:
+        furnished : one of {'all','furnished','unfurnished'} 
+        emirate: one of {'abu-dhabi','dubai','sharjah','ajman','umm-al-quwain','ras-al-khaimah','fujairah'} 
+        page (URL for page number): int
+    
+    This function returns the appropriate URL for www.bayut.com given the arguments 
+    '''
     if page == 1:
         url = f'https://www.bayut.com/to-rent/property/{emirate}/'
     else:
@@ -23,6 +31,13 @@ def get_url(furnished='all',emirate='dubai',page=1):
 
 
 def scrape_bayut(emirate='dubai',furnished='all',fast_scrape=False): 
+    '''
+    args:
+        emirate: one of {'abu-dhabi','dubai','sharjah','ajman','umm-al-quwain','ras-al-khaimah','fujairah'} 
+        furnished : one of {'all','furnished','unfurnished'} 
+        fast_scrape (fast_scrape skips scraping description and amenities, considerably faster): bool
+    This scrapes www.bayut.com website and saves the scraped data in a csv file
+    '''
 
     print(f"Starting scrape for {emirate.capitalize()}..")
     emirate = emirate.lower().replace(' ','-')

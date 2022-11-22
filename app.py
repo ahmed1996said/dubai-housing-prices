@@ -43,7 +43,6 @@ def predict():
     d['sea_view'] = [int(response_dict['sea_view'])]
 
     X_pred = pd.DataFrame(d)
-    print(X_pred)
     loaded_model = load_model()
     y_pred = loaded_model.predict(X_pred).item()
 
@@ -58,7 +57,6 @@ def predict():
 def page_not_found(e):
     return render_template('error.html',error_code='404',message='Opps! Are you lost?',link_to_home=True)
 
-# return render_template("error.html",message="Error message here!")
 
 
 if __name__ == '__main__':
