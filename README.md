@@ -26,7 +26,7 @@ Data cleaning, EDA and Feature Engineering is done in ```Cleaning, EDA and Featu
 Model training was performed using ```sklearn``` library. The notebook ```Model.ipynb``` contains all the relevant code for Linear Regression, Lasso Regression, Random Forest and Neural Network models. Just like before, you should be able to follow my thought process by going through the notebook.
 
 ## ▶️ Web App
-I used  [Flask](https://flask.palletsprojects.com/) to develop the App, and [Bootstrap](https://getbootstrap.com/ for HTML elements and styling. The app is hosted on [Heroku](https://www.heroku.com/).
+I used  [Flask](https://flask.palletsprojects.com/) to develop the App, and [Bootstrap](https://getbootstrap.com/) for HTML elements and styling. The app is hosted on [Heroku](https://www.heroku.com/).
 
 ## ⚠️ Disclaimer
 This tool is developed solely for educational purposes and should not be taken as professional advice for property pricing purposes. I strongly discourage you to make any purchase or price-setting decisions based on this tool.
