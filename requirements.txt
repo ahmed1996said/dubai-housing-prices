@@ -68,5 +68,5 @@ urllib3==1.26.12
 webdriver-manager==3.8.4
 webencodings==0.5.1
 websocket-client==1.4.2
-Werkzeug==2.2.2
+Werkzeug==2.2.3
 wsproto==1.2.0
