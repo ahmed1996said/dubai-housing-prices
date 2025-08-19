@@ -2,7 +2,7 @@
 # Dubai housing rental price prediction tool using 150k+ properties from Bayut.com
 
 ## 🧑🏽‍💻 Checkout the app!
-You can run the app by going to this link: [https://dubai-housing-bxc8gpg5c7eqczbu.canadacentral-01.azurewebsites.net/]([https://dubai-housing.azurewebsites.net/](https://dubai-housing-bxc8gpg5c7eqczbu.canadacentral-01.azurewebsites.net/))
+You can run the app by going on this link [here](https://dubai-housing-bxc8gpg5c7eqczbu.canadacentral-01.azurewebsites.net).
 
 BTW, as the famous saying goes: garbage-in garbage-out. I assume that the user has a common sense (for e.g. not selecting a studio apartment with 10 bathrooms!) If you input non-sensible data, you'll get non-sensible predictions. Currently the app doesn't protect from such inputs, but I'm aiming to think about how I can do this in future versions.
 
